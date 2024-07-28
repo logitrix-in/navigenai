@@ -40,6 +40,8 @@ dependencies:
   dio:
   flutter_svg:
   custom_rating_bar:
+  responsive_builder:
+  flutter_animate:
 
 dev_dependencies:
   flutter_test:
