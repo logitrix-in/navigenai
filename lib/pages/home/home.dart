@@ -47,7 +47,7 @@ class NavigenHome extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal: MediaQuery.of(context).size.width * 0.1),
                 child: Text(
-                  "Hello there! Welcome to NaviGen, your ultimate AI-powered shopping assistant. We're here to help you find the perfect gift for your 19-year-old kid. Based on popular trends and what young adults love, here are some great gift ideas:",
+                  "Welcome to NaviGen, your ultimate AI-powered shopping assistant. We're here to help you find the perfect gift for your 19-year-old kid. Based on popular trends and what young adults love, here are some great gift ideas:",
                   style: GoogleFonts.redHatDisplay(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
