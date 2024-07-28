@@ -15,7 +15,17 @@ class MyApp extends StatelessWidget {
       title: 'Navigen',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
+        tabBarTheme: TabBarTheme(
+          
+          overlayColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.hovered)) {
+                return Color(0xFFFF9900).withOpacity(0.1);
+              }
+              return Colors.transparent;
+            },
+          )
+        ),
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see

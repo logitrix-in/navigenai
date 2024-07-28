@@ -51,7 +51,17 @@ class NavigenHome extends StatelessWidget {
                   labelStyle: GoogleFonts.redHatDisplay(fontSize: 14, fontWeight: FontWeight.w500),
                   unselectedLabelStyle: GoogleFonts.redHatDisplay(fontSize: 14, fontWeight: FontWeight.w500),
                   indicatorColor: Color(0xFFFF9900),
-                  tabs: [
+                  indicatorWeight: 4,
+                  dividerColor: Color(
+                    0xFFE0E0E0,
+                  ),
+                  splashBorderRadius: BorderRadius.circular(5),
+                  tabAlignment: TabAlignment.start,
+                  isScrollable: true,
+                  
+                    
+                  
+                  tabs: const [
                     Tab(text: 'MEN'),
                     Tab(text: 'WOMEN'),
                     Tab(text: 'KIDS'),
@@ -68,7 +78,7 @@ class NavigenHome extends StatelessWidget {
               Container(
                 height: MediaQuery.of(context).size.height, // Ensure the container can scroll if content is larger than the screen
                 child: TabBarView(
-                  children: [
+                  children: const [
                     ProductGridView(),
                     Center(child: Text('Tab 2 content')),
                     Center(child: Text('Tab 3 content')),
