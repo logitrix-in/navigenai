@@ -44,6 +44,8 @@ dependencies:
   flutter_animate:
   mesh_gradient:
   page_transition:
+  web_socket_channel:
+  url_launcher:
 
 dev_dependencies:
   flutter_test:

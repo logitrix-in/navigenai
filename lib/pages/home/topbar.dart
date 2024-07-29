@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:navigenai/pages/home/controller/home_controller.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class TopBar extends StatelessWidget {
-  const TopBar({super.key});
+  final HomeController controller;
+  const TopBar({super.key,required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +64,7 @@ class TopBar extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       
                       ),
@@ -72,7 +75,7 @@ class TopBar extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           width: MediaQuery.of(context).size.width,
                           height: 50,
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 20,
                             vertical: 5,
                           ),
@@ -81,7 +84,8 @@ class TopBar extends StatelessWidget {
                             borderRadius: BorderRadius.circular(5),
                             border: Border.all(color: Colors.grey[300]!),
                           ),
-                          child: TextField(
+                          child: TextFormField(
+                            controller: controller.queryController.value,
                             decoration: InputDecoration.collapsed(hintText: "Ask me anything for Products, Brands and More",hintStyle: GoogleFonts.redHatDisplay(
                               color: Colors.grey[400],
                               fontSize: 16,
@@ -89,7 +93,34 @@ class TopBar extends StatelessWidget {
                           ),
                         ),
                       )),
-                      SizedBox(
+                      const SizedBox(
+                        width: 20,
+                      
+                      ),
+                      InkWell(
+                        onTap: () {
+                          controller.sendMessage(controller.queryController.value.text);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 16,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: Colors.grey[300]!),
+                          ),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(Icons.send, color: Color(0xFF221F1F)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
                         width: 20,
                       
                       ),
@@ -103,15 +134,15 @@ class TopBar extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(color: Colors.grey[300]!),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Icon(Icons.mic_none_outlined, color: Color(0xFF221F1F)),
+                            Icon(Icons.camera_alt_outlined, color: Color(0xFF221F1F)),
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       
                       ),
@@ -125,15 +156,15 @@ class TopBar extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(color: Colors.grey[300]!),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Icon(Icons.camera_alt_outlined, color: Color(0xFF221F1F)),
+                            Icon(Icons.shopping_cart_outlined, color: Color(0xFF221F1F)),
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       
                       ),
@@ -147,33 +178,11 @@ class TopBar extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(color: Colors.grey[300]!),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Icon(Icons.shopping_cart_outlined, color: Color(0xFF221F1F)),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 16,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(color: Colors.grey[300]!),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.menu, color: Color(0xFF221F1F)),
+                            Icon(Icons.menu, color: Color(0xFF221F1F)),
                           ],
                         ),
                       ),
@@ -194,11 +203,11 @@ class TopBar extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(color: Colors.grey[300]!),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Icon(Icons.menu, color: Color(0xFF221F1F)),
+                            Icon(Icons.menu, color: Color(0xFF221F1F)),
                           ],
                         ),
                       ),

@@ -1,11 +1,14 @@
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:navigenai/pages/home/models/productModel.dart';
 import 'package:navigenai/pages/home/product_single_item.dart';
 
 class ProductGridView extends StatelessWidget {
-  const ProductGridView({super.key});
+  final List<ProductModel> products;
+  const ProductGridView({super.key,required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -16,33 +19,18 @@ class ProductGridView extends StatelessWidget {
         margin: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.1,
         ),
-        child:  Wrap(
+        child:  Obx(()=>Wrap(
           spacing: 20,
           runSpacing: 40,
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.start,
-          children: [
-            const ProductSingleCard().animate().then(
+          children: products.map((e) => ProductSingleCard(
+            product: e,
+          ).animate().then(
               delay: Durations.long1,
               duration: Durations.long1
-            ).fade(),
-            const ProductSingleCard().animate().then(
-              delay: Durations.long2,
-              duration: Durations.long2
-            ).fade(),
-            const ProductSingleCard().animate().then(
-              delay: Durations.long3,
-              duration: Durations.long3
-            ).fade(),
-            const ProductSingleCard().animate().then(
-              delay: Durations.long4,
-              duration: Durations.long4
-            ).fade(),
-            
-      
-      
-          ],
-        ),
+            ).fade(),).toList(),
+        ),)
       ),
     );
   }

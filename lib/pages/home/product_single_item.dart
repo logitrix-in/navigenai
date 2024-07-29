@@ -1,10 +1,13 @@
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:navigenai/pages/home/models/productModel.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductSingleCard extends StatelessWidget {
-  const ProductSingleCard({super.key});
+  final ProductModel product;
+  const ProductSingleCard({super.key,required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +29,30 @@ class ProductSingleCard extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    image: const DecorationImage(
+                    image:  DecorationImage(
                         image: NetworkImage(
-                            "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/585e2cd2-4f2a-408c-a8ba-f89952cdf332/revolution-6-road-running-shoes-NC0P7k.png"),
+                            product.payload!.image!),
                         fit: BoxFit.cover)),
               ),
               const SizedBox(height: 10),
-              Text(
-                "Nike Air Max 270",
-                style: GoogleFonts.redHatDisplay(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: const Color(0xFF221F1F),
+              Container(
+                constraints: BoxConstraints(
+                  maxWidth: sizingInformation.deviceScreenType == DeviceScreenType.desktop? MediaQuery.of(context).size.width * 0.15 : MediaQuery.of(context).size.width,
+                  
+                ),
+                child: Text(
+                  product.payload!.name!,
+                  maxLines: 2,
+                  style: GoogleFonts.redHatDisplay(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF221F1F),
+                  ),
                 ),
               ),
               const SizedBox(height: 5),
               Text(
-                "Nike",
+                product.payload!.mainCategory!,
                 style: GoogleFonts.redHatDisplay(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
@@ -59,7 +69,7 @@ class ProductSingleCard extends StatelessWidget {
                 
                 maxRating: 5,
                 halfFilledIcon: Icons.star_half_outlined,
-                initialRating: 3.5,
+                initialRating: product.payload!.ratings != null ? double.parse(product.payload!.ratings!) : 0,
                 isHalfAllowed: true,
         
               ),
@@ -74,7 +84,7 @@ class ProductSingleCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "₹ 1,200",
+                      "${product.payload!.discountPrice}",
                       style: GoogleFonts.redHatDisplay(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -114,9 +124,11 @@ class ProductSingleCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () async{
+                          await _launchUrl(product.payload!.link!);
+                        },
                         label: Text(
-                          "Add to Cart",
+                          "Buy Now",
                           style: GoogleFonts.redHatDisplay(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -131,4 +143,10 @@ class ProductSingleCard extends StatelessWidget {
       }
     );
   }
+  Future<void> _launchUrl(String url) async {
+  final _url = Uri.parse(url);
+  if (!await launchUrl(_url)) {
+    throw Exception('Could not launch $_url');
+  }
+}
 }
